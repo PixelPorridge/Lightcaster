@@ -1,0 +1,272 @@
+[gd_scene load_steps=20 format=3 uid="uid://bggtr3kt4imvo"]
+
+[ext_resource type="Script" path="res://Mirrors/Mirror.gd" id="1_1645o"]
+[ext_resource type="Texture2D" uid="uid://b85lxcb7sgdy7" path="res://Mirrors/Mirrors.png" id="2_xcnlm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_prgmr"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_22kgr"]
+radius = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xcjx0"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_k0nkl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Holdable/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ouro7"]
+resource_name = "close"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_t0sw6"]
+resource_name = "fall"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Holdable/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_hnyun"]
+resource_name = "far"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lthv0"]
+_data = {
+"RESET": SubResource("Animation_k0nkl"),
+"close": SubResource("Animation_ouro7"),
+"fall": SubResource("Animation_t0sw6"),
+"far": SubResource("Animation_hnyun")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ul1wc"]
+animation = &"close"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hlx1i"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h144d"]
+animation = &"far"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cq3q6"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yguit"]
+advance_mode = 2
+advance_expression = "mirror_proximity_state == MirrorProximityState.CLOSE"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ovkcf"]
+advance_mode = 2
+advance_expression = "mirror_proximity_state == MirrorProximityState.FAR"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_du2oa"]
+advance_mode = 2
+advance_condition = &"falling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28muf"]
+advance_mode = 2
+advance_condition = &"falling"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i2wt5"]
+states/Close/node = SubResource("AnimationNodeAnimation_ul1wc")
+states/Close/position = Vector2(535, 100)
+states/Fall/node = SubResource("AnimationNodeAnimation_hlx1i")
+states/Fall/position = Vector2(443, 208)
+states/Far/node = SubResource("AnimationNodeAnimation_h144d")
+states/Far/position = Vector2(358, 100)
+transitions = ["Start", "Far", SubResource("AnimationNodeStateMachineTransition_cq3q6"), "Far", "Close", SubResource("AnimationNodeStateMachineTransition_yguit"), "Close", "Far", SubResource("AnimationNodeStateMachineTransition_ovkcf"), "Far", "Fall", SubResource("AnimationNodeStateMachineTransition_du2oa"), "Close", "Fall", SubResource("AnimationNodeStateMachineTransition_28muf")]
+graph_offset = Vector2(-115, -37)
+
+[node name="SquareMirror" type="CharacterBody2D" node_paths=PackedStringArray("holdable_area", "void_check_area", "sprite", "collider", "animation_tree")]
+collision_layer = 16
+collision_mask = 24
+script = ExtResource("1_1645o")
+holdable_area = NodePath("Holdable")
+void_check_area = NodePath("VoidCheck")
+sprite = NodePath("Sprite2D")
+collider = NodePath("CollisionShape2D")
+animation_tree = NodePath("AnimationTree")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xcnlm")
+hframes = 2
+vframes = 4
+frame = 4
+
+[node name="Holdable" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Holdable"]
+shape = SubResource("CircleShape2D_prgmr")
+debug_color = Color(0.99467, 0, 0.221427, 0.286)
+
+[node name="VoidCheck" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidCheck"]
+shape = SubResource("CircleShape2D_22kgr")
+debug_color = Color(0, 0.648, 0.199, 0.275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xcjx0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lthv0")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_i2wt5")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/falling = false
+
+[connection signal="area_entered" from="Holdable" to="." method="_on_holdable_area_entered"]
+[connection signal="area_exited" from="Holdable" to="." method="_on_holdable_area_exited"]
