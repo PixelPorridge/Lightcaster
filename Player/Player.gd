@@ -5,9 +5,11 @@ extends CharacterBody2D
 @export var sprite: Sprite2D
 @export var flippable: Node2D
 @export var target_sprite: Sprite2D
+@export var trajectory_line: Line2D
 @export var guides_animation_tree: AnimationTree
 @export var holdable_check_area: Area2D
 @export var holdable_position: Node2D
+@export var level: Level
 
 @export_group("Audio")
 @export var audio_stream_player: AudioStreamPlayer2D
@@ -51,11 +53,12 @@ func _physics_process(delta: float) -> void:
 	# --- Shoot Light ---
 
 	# Begin aiming light
-	if (Input.is_action_pressed(InputMapActions.SHOOT) && light_state == LightState.READY && !mirror):
+	if Input.is_action_pressed(InputMapActions.SHOOT) && light_state == LightState.READY && !mirror && level.light_shots > 0:
 		light_state = LightState.AIMING
+		trajectory_line.visible = true
 
 	# Shoot light after aimed
-	if (Input.is_action_just_released(InputMapActions.SHOOT) && light_state == LightState.AIMING && !mirror):
+	if Input.is_action_just_released(InputMapActions.SHOOT) && light_state == LightState.AIMING && !mirror:
 
 		# Instantiate light
 		var light: Light = light_scene.instantiate()
@@ -76,8 +79,13 @@ func _physics_process(delta: float) -> void:
 		# Play random shoot sound
 		audio_stream_player.play()
 
+		# Decrease level light shots available
+		level.light_shots -= 1
+
 		light_state = LightState.READY
-	
+		trajectory_line.visible = false
+
+		
 	# --- Holdable Mirrors ---
 
 	# Pickup mirror

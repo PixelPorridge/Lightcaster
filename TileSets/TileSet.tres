@@ -1,15 +1,9 @@
-[gd_scene load_steps=17 format=4 uid="uid://inevp754jvb4"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://lk8ohu2afxbm"]
 
-[ext_resource type="Script" path="res://Scenes/Game.gd" id="1_6pnis"]
-[ext_resource type="PackedScene" uid="uid://d23rgeeq70rmq" path="res://Player/Player.tscn" id="1_squg8"]
-[ext_resource type="Texture2D" uid="uid://cu0tui8hau1i" path="res://TileSets/TileSet.png" id="2_j3ifx"]
-[ext_resource type="PackedScene" uid="uid://bwa4dr7y2j4ol" path="res://Scenes/MirrorParticles/MirrorParticles.tscn" id="3_qefnl"]
-[ext_resource type="PackedScene" uid="uid://bsoet5mabf2b7" path="res://Scenes/MirrorParticles/MirrorParticlesThin.tscn" id="4_664xt"]
-[ext_resource type="PackedScene" uid="uid://bpf6c2tdt44wk" path="res://Mirrors/CircleMirror.tscn" id="6_5u4ru"]
-[ext_resource type="PackedScene" uid="uid://bggtr3kt4imvo" path="res://Mirrors/SquareMirror.tscn" id="7_xq1ec"]
+[ext_resource type="Texture2D" uid="uid://cu0tui8hau1i" path="res://TileSets/TileSet.png" id="1_y04xm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_to1eq"]
-texture = ExtResource("2_j3ifx")
+texture = ExtResource("1_y04xm")
 texture_region_size = Vector2i(12, 12)
 0:0/0 = 0
 0:0/0/z_index = 100
@@ -214,7 +208,7 @@ texture_region_size = Vector2i(12, 12)
 6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
 6:5/0/physics_layer_3/polygon_0/points = PackedVector2Array(6, -6, 6, 6, -6, 6, -6, -6)
 
-[sub_resource type="TileSet" id="TileSet_osc4h"]
+[resource]
 tile_size = Vector2i(12, 12)
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
@@ -225,121 +219,3 @@ physics_layer_2/collision_mask = 0
 physics_layer_3/collision_layer = 128
 physics_layer_3/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_to1eq")
-
-[sub_resource type="Gradient" id="Gradient_5bgmy"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_n5rk3"]
-gradient = SubResource("Gradient_5bgmy")
-width = 32
-
-[sub_resource type="Gradient" id="Gradient_2o2ta"]
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_god7p"]
-gradient = SubResource("Gradient_2o2ta")
-width = 32
-
-[sub_resource type="Gradient" id="Gradient_c8opo"]
-colors = PackedColorArray(0, 0, 0, 1, 0.832652, 0.873391, 0.93153, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7wx3n"]
-gradient = SubResource("Gradient_c8opo")
-
-[sub_resource type="Environment" id="Environment_pj4va"]
-background_mode = 3
-glow_enabled = true
-glow_levels/3 = 1.5
-glow_intensity = 0.2
-glow_blend_mode = 1
-glow_hdr_threshold = 0.1
-adjustment_color_correction = SubResource("GradientTexture1D_7wx3n")
-
-[node name="Game" type="Node2D"]
-script = ExtResource("1_6pnis")
-
-[node name="World" type="Node2D" parent="."]
-
-[node name="TileMapLayer" type="TileMapLayer" parent="World"]
-use_parent_material = true
-tile_map_data = PackedByteArray("AAALAAQAAAADAAgAAAAJAAQAAAADAAgAABALAAUAAAABAAcAAAALAAYAAAAAAAcAAAAJAAUAAAABAAgAABAJAAYAAAAAAAcAAAAKAAQAAAACAAcAAAAMAAMAAAADAAMAAAAMAAQAAAABAAMAAAAMAAUAAAABAAIAAAAMAAYAAAABAAIAAAAMAAcAAAACAAMAAAAMAAgAAAACAAQAAAANAAUAAAACAAIAAAANAAQAAAADAAMAAAANAAMAAAAEAAMAAAANAAYAAAAEAAIAAAANAAcAAAAEAAIAAAANAAgAAAAEAAQAAAAPAAUAAAADAAQAAAAQAAUAAAADAAQAAAARAAUAAAADAAQAAAASAAUAAAADAAQAAAATAAUAAAADAAQAAAAUAAUAAAADAAQAAAAVAAUAAAADAAQAAAALAAMAAAADAAQAAAALAAIAAAACAAEAAAAMAAIAAAACAAEAAAANAAIAAAAEAAEAAAAKAAIAAAADAAEAAAAJAAIAAAACAAEAAAAJAAMAAAADAAQAAAAKAAMAAAADAAQAAAAIAAIAAAADAAEAAAAIAAMAAAADAAIAAAAIAAQAAAAEAAIAAAAHAAMAAAABAAMAAAAHAAIAAAABAAEAAAAHAAQAAAABAAMAAAAHAAUAAAABAAMAAAAHAAYAAAABAAMAAAAHAAcAAAABAAMAAAAIAAYAAAAEAAIAAAAIAAUAAAAEAAMAAAAIAAcAAAACAAMAAAAIAAgAAAACAAMAAAAIAAkAAAAEAAQAAAAHAAkAAAADAAQAAAAHAAgAAAACAAMAAAAGAAkAAAADAAQAAAAFAAkAAAADAAQAAAAEAAkAAAADAAQAAAADAAkAAAADAAQAAAACAAkAAAADAAQAAAD+/wkAAAAAAAEAAAD//wkAAAADAAQAAAAAAAkAAAADAAQAAAABAAkAAAACAAQAAAAKAAYAAAAAAAcAAAAOAAQAAAADAAEAAAAOAAUAAAADAAQAAAAPAAQAAAADAAEAAAAQAAQAAAACAAEAAAARAAQAAAACAAEAAAASAAQAAAACAAEAAAATAAQAAAACAAEAAAAUAAQAAAACAAEAAAAVAAQAAAACAAEAAAAOAAYAAAADAAgAABAPAAYAAAACAAcAAAAQAAYAAAACAAUAAAARAAYAAAABAAUAAAASAAYAAAACAAUAAAATAAYAAAADAAUAAAAUAAYAAAADAAUAAAAVAAYAAAAEAAUAAAAHAAEAAAAAAAgAAAAIAAEAAAAAAAcAAAAJAAEAAAAAAAcAAAAKAAEAAAAAAAcAAAALAAEAAAAAAAgAAAAMAAEAAAAAAAcAAAANAAEAAAAAAAcAAAAGAAgAAAACAAEAAAAFAAgAAAADAAEAAAAEAAgAAAACAAEAAAADAAgAAAACAAEAAAACAAgAAAACAAEAAAABAAgAAAACAAEAAAAAAAgAAAACAAEAAAD//wgAAAACAAEAAAD+/wgAAAAAAAMAAAAOAAMAAAAAAAcAAAAPAAMAAAAAAAcAAAAQAAMAAAAAAAgAAAARAAMAAAAEAAAAAAASAAMAAAACAAAAAAATAAMAAAACAAAAAAAUAAMAAAACAAAAAAAVAAMAAAADAAAAAAAGAAcAAAAEAAAAAAAFAAcAAAACAAAAAAAEAAcAAAACAAAAAAADAAcAAAABAAAAAAACAAcAAAADAAAAAAABAAcAAAADAAAAAAAAAAcAAAACAAAAAAD//wcAAAACAAAAAAD+/wcAAAAAAAMAAAD+/woAAAAAAAUAAAD//woAAAADAAUAAAAAAAoAAAACAAUAAAABAAoAAAAEAAUAAAACAAoAAAAEAAUAAAADAAoAAAAEAAUAAAAEAAoAAAADAAUAAAAFAAoAAAAEAAUAAAAGAAoAAAADAAUAAAAHAAoAAAABAAUAAAAIAAoAAAADAAUAAAAOAAcAAAABAAcAABAOAAgAAAABAAgAABAOAAIAAAABAAcAABAGAAIAAAABAAgAAAAGAAMAAAABAAcAAAAGAAQAAAABAAcAAAAGAAUAAAAAAAQAAAAGAAYAAAAAAAMAAAAGAAEAAAABAAcAAAAOAAEAAAABAAcAABAOAAkAAAAEAAgAABANAAkAAAACAAgAAAAMAAkAAAACAAcAAAAJAAoAAAAFAAUAAAAJAAkAAAAAAAYAABALAAkAAAACAAgAAAAKAAcAAAABAAYAAAAJAAcAAAACAAYAAAALAAcAAAACAAYAABAJAAgAAAADAAYAAAALAAgAAAADAAYAABAKAAkAAAACAAcAAAAWAAMAAAAFAAMAAAAWAAQAAAAFAAQAAAAWAAUAAAAFAAMAAAAWAAYAAAAFAAUAAAAKAAgAAAAGAAUAAAA=")
-tile_set = SubResource("TileSet_osc4h")
-
-[node name="MirrorParticles" type="Node2D" parent="World"]
-visible = false
-
-[node name="MirrorParticles" parent="World/MirrorParticles" instance=ExtResource("3_qefnl")]
-position = Vector2(150, 18)
-
-[node name="MirrorParticlesThin" parent="World/MirrorParticles" instance=ExtResource("4_664xt")]
-position = Vector2(170, 30)
-
-[node name="MirrorParticlesThin2" parent="World/MirrorParticles" instance=ExtResource("4_664xt")]
-position = Vector2(142, 66)
-
-[node name="MirrorParticlesThin3" parent="World/MirrorParticles" instance=ExtResource("4_664xt")]
-position = Vector2(170, 90)
-
-[node name="MirrorParticlesThin4" parent="World/MirrorParticles" instance=ExtResource("4_664xt")]
-position = Vector2(150, 110)
-
-[node name="Player" parent="." instance=ExtResource("1_squg8")]
-z_index = 1
-position = Vector2(36, 111)
-
-[node name="EdgeScreenFade" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="EdgeScreenFade"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="EdgeScreenFade/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-
-[node name="LeftBlack" type="ColorRect" parent="EdgeScreenFade/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-color = Color(0, 0, 0, 1)
-
-[node name="LeftFade" type="TextureRect" parent="EdgeScreenFade/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = SubResource("GradientTexture2D_n5rk3")
-
-[node name="Control" type="Control" parent="EdgeScreenFade/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 20.0
-
-[node name="RightFade" type="TextureRect" parent="EdgeScreenFade/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = SubResource("GradientTexture2D_god7p")
-
-[node name="RightBlack" type="ColorRect" parent="EdgeScreenFade/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-color = Color(0, 0, 0, 1)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_pj4va")
-
-[node name="CircleMirror" parent="." instance=ExtResource("6_5u4ru")]
-position = Vector2(60, 104)
-
-[node name="SquareMirror" parent="." instance=ExtResource("7_xq1ec")]
-position = Vector2(95, 113)
