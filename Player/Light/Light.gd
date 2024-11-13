@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 			impact.global_position = global_position
 			impact.global_rotation = randf() * 2 * PI
 
-			get_tree().root.add_child(impact)
+			get_tree().current_scene.add_child(impact)
 		
 			# Play random sound
 			audio_stream_player.play()
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	light_ghost.global_position = global_position
 	light_ghost.global_rotation = global_rotation
 
-	get_tree().root.add_child(light_ghost)
+	get_tree().current_scene.add_child(light_ghost)
 
 
 func _on_lifetime_timer_timeout() -> void:

@@ -1,24 +1,12 @@
-[gd_scene load_steps=13 format=4 uid="uid://inevp754jvb4"]
+[gd_scene load_steps=11 format=4 uid="uid://inevp754jvb4"]
 
 [ext_resource type="Script" path="res://Levels/Level.gd" id="1_jfkoo"]
+[ext_resource type="PackedScene" uid="uid://mi5eru04odwu" path="res://Levels/LevelUI/LevelUI.tscn" id="2_0klru"]
 [ext_resource type="TileSet" uid="uid://lk8ohu2afxbm" path="res://TileSets/TileSet.tres" id="2_dg7w2"]
 [ext_resource type="PackedScene" uid="uid://d23rgeeq70rmq" path="res://Player/Player.tscn" id="4_df28p"]
 [ext_resource type="PackedScene" uid="uid://bpf6c2tdt44wk" path="res://Mirrors/CircleMirror.tscn" id="5_svj0x"]
 [ext_resource type="PackedScene" uid="uid://bggtr3kt4imvo" path="res://Mirrors/SquareMirror.tscn" id="6_iq2or"]
-
-[sub_resource type="Gradient" id="Gradient_5bgmy"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_n5rk3"]
-gradient = SubResource("Gradient_5bgmy")
-width = 32
-
-[sub_resource type="Gradient" id="Gradient_2o2ta"]
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_god7p"]
-gradient = SubResource("Gradient_2o2ta")
-width = 32
+[ext_resource type="PackedScene" uid="uid://cca8115pbgr0v" path="res://Levels/LevelEnd/LevelEnd.tscn" id="6_wti38"]
 
 [sub_resource type="Gradient" id="Gradient_c8opo"]
 colors = PackedColorArray(0, 0, 0, 1, 0.832652, 0.873391, 0.93153, 1)
@@ -35,58 +23,18 @@ glow_blend_mode = 1
 glow_hdr_threshold = 0.1
 adjustment_color_correction = SubResource("GradientTexture1D_7wx3n")
 
-[node name="Level1" type="Node2D"]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("level_ui")]
 script = ExtResource("1_jfkoo")
 level_title = "Level 1"
 light_shots = 100
+level_ui = NodePath("LevelUI")
 
-[node name="LevelUI" type="CanvasLayer" parent="."]
+[node name="LevelUI" parent="." node_paths=PackedStringArray("level") instance=ExtResource("2_0klru")]
+level = NodePath("..")
 
-[node name="Control" type="Control" parent="LevelUI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="LevelUI/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-
-[node name="LeftBlack" type="ColorRect" parent="LevelUI/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-color = Color(0, 0, 0, 1)
-
-[node name="LeftFade" type="TextureRect" parent="LevelUI/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = SubResource("GradientTexture2D_n5rk3")
-
-[node name="Control" type="Control" parent="LevelUI/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 20.0
-
-[node name="RightFade" type="TextureRect" parent="LevelUI/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = SubResource("GradientTexture2D_god7p")
-
-[node name="RightBlack" type="ColorRect" parent="LevelUI/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-color = Color(0, 0, 0, 1)
+[node name="LevelEnd" parent="." node_paths=PackedStringArray("level") instance=ExtResource("6_wti38")]
+position = Vector2(228, 60)
+level = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pj4va")
@@ -100,7 +48,7 @@ tile_set = ExtResource("2_dg7w2")
 
 [node name="Player" parent="." node_paths=PackedStringArray("level") instance=ExtResource("4_df28p")]
 z_index = 1
-position = Vector2(36, 111)
+position = Vector2(36, 108)
 level = NodePath("..")
 
 [node name="CircleMirror" parent="." instance=ExtResource("5_svj0x")]

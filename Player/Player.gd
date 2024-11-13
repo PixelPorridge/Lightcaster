@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		light.global_position = light_spawn_position.global_position
 		light.look_at(get_global_mouse_position())
 
-		get_tree().root.add_child(light)
+		get_tree().current_scene.add_child(light)
 
 		# Instantiate impact
 		var impact: Node2D = impact_scene.instantiate()
@@ -74,7 +74,7 @@ func _physics_process(delta: float) -> void:
 		impact.global_position = light_spawn_position.global_position
 		impact.global_rotation = randf() * 2 * PI
 
-		get_tree().root.add_child(impact)
+		get_tree().current_scene.add_child(impact)
 
 		# Play random shoot sound
 		audio_stream_player.play()
