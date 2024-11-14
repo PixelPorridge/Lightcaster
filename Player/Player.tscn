@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://d23rgeeq70rmq"]
+[gd_scene load_steps=52 format=3 uid="uid://d23rgeeq70rmq"]
 
 [ext_resource type="Texture2D" uid="uid://ubxuatlbd5ev" path="res://Player/Player.png" id="1_iqose"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_x65ow"]
@@ -115,6 +115,9 @@ graph_offset = Vector2(-352, -60)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bo1jj"]
 shader = ExtResource("6_o1gb7")
+
+[sub_resource type="Gradient" id="Gradient_j8eq4"]
+colors = PackedColorArray(1, 1, 1, 0.5, 0, 0, 0, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hhauu"]
 b = Vector2(0, 0)
@@ -373,8 +376,9 @@ visible = false
 z_index = -1
 material = SubResource("ShaderMaterial_bo1jj")
 position = Vector2(0, -3)
-points = PackedVector2Array(0, 0, 20, 0)
+points = PackedVector2Array(0, 0, 50, 0)
 width = 4.0
+gradient = SubResource("Gradient_j8eq4")
 texture = ExtResource("6_pwhrv")
 texture_mode = 1
 script = ExtResource("7_8gkgn")

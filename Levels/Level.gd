@@ -7,6 +7,13 @@ extends Node2D
 @export var level_ui: LevelUI
 
 
+func use_light_shot():
+    if light_shots <= 0: return
+
+    light_shots -= 1
+    level_ui.use_light_shot()
+
+
 func level_end_reached():
     # Begin fading to black
     level_ui.fade_to_black()

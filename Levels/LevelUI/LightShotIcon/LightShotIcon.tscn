@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbooybtww6khe"]
+
+[ext_resource type="Script" path="res://Levels/LevelUI/LightShotIcon/LightShotIcon.gd" id="2_lm7fk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4vdy"]
+bg_color = Color(1, 1, 1, 0.2)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ov7fl"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing_size = 0.1
+
+[node name="LightShotIcon" type="Control" node_paths=PackedStringArray("white_panel")]
+custom_minimum_size = Vector2(12, 6)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 12.0
+offset_bottom = 6.0
+script = ExtResource("2_lm7fk")
+white_panel = NodePath("White")
+
+[node name="Grey" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4vdy")
+
+[node name="White" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ov7fl")

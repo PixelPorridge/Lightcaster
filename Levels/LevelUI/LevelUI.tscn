@@ -1,20 +1,26 @@
 [gd_scene load_steps=15 format=3 uid="uid://mi5eru04odwu"]
 
 [ext_resource type="Script" path="res://Levels/LevelUI/LevelUI.gd" id="1_a1pir"]
+[ext_resource type="PackedScene" uid="uid://dbooybtww6khe" path="res://Levels/LevelUI/LightShotIcon/LightShotIcon.tscn" id="2_o0xan"]
+[ext_resource type="FontFile" uid="uid://yxjha0v2s8r2" path="res://Fonts/DangrekRegular.ttf" id="3_qjmjq"]
 
-[sub_resource type="Gradient" id="Gradient_5bgmy"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcv0u"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing_size = 0.1
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_n5rk3"]
-gradient = SubResource("Gradient_5bgmy")
-width = 32
-
-[sub_resource type="Gradient" id="Gradient_2o2ta"]
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_god7p"]
-gradient = SubResource("Gradient_2o2ta")
-width = 32
+[sub_resource type="FontVariation" id="FontVariation_6xnxt"]
+base_font = ExtResource("3_qjmjq")
+spacing_top = -4
+spacing_bottom = -5
 
 [sub_resource type="Animation" id="Animation_h2e3e"]
 length = 0.001
@@ -107,9 +113,14 @@ states/disappear/position = Vector2(388, 100)
 transitions = ["Start", "disappear", SubResource("AnimationNodeStateMachineTransition_yb412"), "disappear", "appear", SubResource("AnimationNodeStateMachineTransition_0smm0")]
 graph_offset = Vector2(-140, -33)
 
-[node name="LevelUI" type="CanvasLayer" node_paths=PackedStringArray("black_animation_tree")]
+[node name="LevelUI" type="CanvasLayer" node_paths=PackedStringArray("black_animation_tree", "light_shots_ui", "light_shots_hbox", "level_title_ui", "level_title_label")]
 script = ExtResource("1_a1pir")
 black_animation_tree = NodePath("Control/Black/AnimationTree")
+light_shot_icon_scene = ExtResource("2_o0xan")
+light_shots_ui = NodePath("Control/LightShots")
+light_shots_hbox = NodePath("Control/LightShots/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer")
+level_title_ui = NodePath("Control/LevelTitle")
+level_title_label = NodePath("Control/LevelTitle/PanelContainer/MarginContainer/Label")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -121,41 +132,74 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SideGradients" type="HBoxContainer" parent="Control"]
+[node name="LightShots" type="MarginContainer" parent="Control"]
 layout_mode = 1
-anchors_preset = 15
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = -13.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/LightShots"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fcv0u")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/LightShots/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/LightShots/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Label" type="Label" parent="Control/LightShots/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_6xnxt")
+theme_override_font_sizes/font_size = 8
+text = "LIGHT"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/LightShots/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="LevelTitle" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
+offset_left = -64.0
+offset_top = -32.0
+offset_bottom = -14.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="LeftBlack" type="ColorRect" parent="Control/SideGradients"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/LevelTitle"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-color = Color(0, 0, 0, 1)
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_fcv0u")
 
-[node name="LeftFade" type="TextureRect" parent="Control/SideGradients"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/LevelTitle/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-texture = SubResource("GradientTexture2D_n5rk3")
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
 
-[node name="Control" type="Control" parent="Control/SideGradients"]
+[node name="Label" type="Label" parent="Control/LevelTitle/PanelContainer/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 20.0
-
-[node name="RightFade" type="TextureRect" parent="Control/SideGradients"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = SubResource("GradientTexture2D_god7p")
-
-[node name="RightBlack" type="ColorRect" parent="Control/SideGradients"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-color = Color(0, 0, 0, 1)
+size_flags_horizontal = 8
+theme_override_fonts/font = SubResource("FontVariation_6xnxt")
+theme_override_font_sizes/font_size = 8
+text = "LEVEL UNKOWN"
 
 [node name="Black" type="ColorRect" parent="Control"]
 layout_mode = 1

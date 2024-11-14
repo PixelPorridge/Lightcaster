@@ -79,8 +79,8 @@ func _physics_process(delta: float) -> void:
 		# Play random shoot sound
 		audio_stream_player.play()
 
-		# Decrease level light shots available
-		level.light_shots -= 1
+		# Notify level to use light shot
+		level.use_light_shot()
 
 		light_state = LightState.READY
 		trajectory_line.visible = false
