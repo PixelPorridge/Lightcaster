@@ -38,7 +38,7 @@ anti_aliasing_size = 0.1
 process_mode = 3
 script = ExtResource("1_6s5d7")
 black = NodePath("Control/Black")
-menu = NodePath("Control/Menu")
+menu = NodePath("Control/CenterContainer")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -57,46 +57,44 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Menu" type="MarginContainer" parent="Control"]
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 84
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 84
-theme_override_constants/margin_bottom = 12
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/Menu"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/CenterContainer"]
+custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_clyhe")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/Menu/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/CenterContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Menu/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="Control/Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_fonts/font = SubResource("FontVariation_l4hac")
 theme_override_font_sizes/font_size = 12
 text = "PAUSED"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 4
 
-[node name="Resume" type="Button" parent="Control/Menu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_vertical = 3
@@ -112,7 +110,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_clyhe")
 theme_override_styles/normal = SubResource("StyleBoxFlat_clyhe")
 text = "RESUME"
 
-[node name="RestartLevel" type="Button" parent="Control/Menu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="RestartLevel" type="Button" parent="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_vertical = 3
@@ -128,7 +126,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_clyhe")
 theme_override_styles/normal = SubResource("StyleBoxFlat_clyhe")
 text = "RESTART LEVEL"
 
-[node name="PreviousLevel" type="Button" parent="Control/Menu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="PreviousLevel" type="Button" parent="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_vertical = 3
@@ -144,7 +142,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_clyhe")
 theme_override_styles/normal = SubResource("StyleBoxFlat_clyhe")
 text = "PREVIOUS LEVEL"
 
-[node name="RestartGame" type="Button" parent="Control/Menu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="RestartGame" type="Button" parent="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_vertical = 3
@@ -160,7 +158,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_clyhe")
 theme_override_styles/normal = SubResource("StyleBoxFlat_clyhe")
 text = "RESTART GAME"
 
-[connection signal="pressed" from="Control/Menu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Control/Menu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/RestartLevel" to="." method="_on_restart_level_pressed"]
-[connection signal="pressed" from="Control/Menu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PreviousLevel" to="." method="_on_previous_level_pressed"]
-[connection signal="pressed" from="Control/Menu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/RestartGame" to="." method="_on_restart_game_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/RestartLevel" to="." method="_on_restart_level_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PreviousLevel" to="." method="_on_previous_level_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/RestartGame" to="." method="_on_restart_game_pressed"]
