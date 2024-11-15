@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dk4d088v27i7y"]
+[gd_scene load_steps=14 format=3 uid="uid://dk4d088v27i7y"]
 
 [ext_resource type="Script" path="res://Levels/Level.gd" id="1_h0358"]
 [ext_resource type="PackedScene" uid="uid://mi5eru04odwu" path="res://Levels/LevelUI/LevelUI.tscn" id="2_jsgls"]
 [ext_resource type="PackedScene" uid="uid://cca8115pbgr0v" path="res://Levels/LevelEnd/LevelEnd.tscn" id="3_g2dsr"]
 [ext_resource type="TileSet" uid="uid://lk8ohu2afxbm" path="res://TileSets/TileSet.tres" id="4_rf4ma"]
 [ext_resource type="Texture2D" uid="uid://cu0tui8hau1i" path="res://TileSets/TileSet.png" id="4_vr65g"]
+[ext_resource type="PackedScene" uid="uid://b0kayv7rlhdfi" path="res://Levels/PauseMenu/PauseMenu.tscn" id="4_xwind"]
 [ext_resource type="PackedScene" uid="uid://d23rgeeq70rmq" path="res://Player/Player.tscn" id="5_mrw3e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_28j44"]
@@ -58,6 +59,9 @@ process_callback = 0
 
 [node name="LevelUI" parent="." node_paths=PackedStringArray("level") instance=ExtResource("2_jsgls")]
 level = NodePath("..")
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_xwind")]
+visible = false
 
 [node name="LevelEnd" parent="." node_paths=PackedStringArray("level") instance=ExtResource("3_g2dsr")]
 level = NodePath("..")
