@@ -50,6 +50,11 @@ func hide_pause_menu():
 	get_tree().paused = false
 
 
+func _on_resume_pressed() -> void:
+	# Resume game
+	hide_pause_menu()
+
+
 func _on_restart_level_pressed() -> void:
 	# Unpause game
 	get_tree().paused = false
