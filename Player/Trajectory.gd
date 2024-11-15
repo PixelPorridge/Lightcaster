@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 			var collision_layer_bitmask = PhysicsServer2D.body_get_collision_layer(collision.get_collider_rid())
 
 			# Stop trajectory
-			if collision_layer_bitmask == CollisionLayers.LIGHT_BLOCKER_BITMASK:
+			if collision_layer_bitmask != CollisionLayers.LIGHT_REFLECTOR_BITMASK:
 				break
 		
 		# Add point at next position

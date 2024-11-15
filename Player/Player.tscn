@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://d23rgeeq70rmq"]
+[gd_scene load_steps=53 format=3 uid="uid://d23rgeeq70rmq"]
 
 [ext_resource type="Texture2D" uid="uid://ubxuatlbd5ev" path="res://Player/Player.png" id="1_iqose"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_x65ow"]
@@ -17,6 +17,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nictp"]
 radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2feb0"]
+radius = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cqtik"]
 size = Vector2(6, 2)
@@ -282,7 +285,7 @@ animation = &"spin"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_8mffk"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a5hth"]
-graph_offset = Vector2(-722.491, -25.5327)
+graph_offset = Vector2(-730.492, -22.8511)
 nodes/ScaleStateMachine/node = SubResource("AnimationNodeStateMachine_csj0h")
 nodes/ScaleStateMachine/position = Vector2(-240, 320)
 nodes/Spin/node = SubResource("AnimationNodeAnimation_6yl2t")
@@ -312,8 +315,9 @@ stream_2/stream = ExtResource("9_ggj11")
 stream_3/stream = ExtResource("10_afm8t")
 stream_4/stream = ExtResource("11_muco4")
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "flippable", "target_sprite", "trajectory_line", "guides_animation_tree", "holdable_check_area", "holdable_position", "audio_stream_player", "light_spawn_position")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "flippable", "target_sprite", "trajectory_line", "guides_animation_tree", "holdable_check_area", "holdable_position", "detection_area", "audio_stream_player", "light_spawn_position")]
 collision_layer = 2
+collision_mask = 1025
 script = ExtResource("1_x65ow")
 sprite = NodePath("Flippable/SpritePivot/Sprite2D")
 flippable = NodePath("Flippable")
@@ -322,6 +326,7 @@ trajectory_line = NodePath("Guides/Trajectory")
 guides_animation_tree = NodePath("Guides/AnimationTree")
 holdable_check_area = NodePath("HoldableCheck")
 holdable_position = NodePath("Flippable/HoldablePosition")
+detection_area = NodePath("Detection")
 audio_stream_player = NodePath("AudioStreamPlayer2D")
 light_scene = ExtResource("2_2hmrh")
 light_spawn_position = NodePath("Flippable/LightSpawnPosition")
@@ -356,6 +361,15 @@ position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_nictp")
 debug_color = Color(0.997056, 0, 0.174189, 0.42)
 
+[node name="Detection" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_2feb0")
+debug_color = Color(0.4095, 0.586783, 0.440074, 0.42)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cqtik")
 
@@ -388,7 +402,7 @@ speed = 200.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="Guides/Trajectory"]
 collision_layer = 0
-collision_mask = 24
+collision_mask = 1048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Guides/Trajectory/CharacterBody2D"]
 shape = SubResource("SegmentShape2D_hhauu")

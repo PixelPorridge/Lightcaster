@@ -17,7 +17,7 @@ func setup_pivot_offset():
 
 func use():
 	# Animate node scale then queue free
-	var tween = get_tree().current_scene.create_tween()
+	var tween = get_tree().current_scene.create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 	
 	tween.tween_property(white_panel, "scale", Vector2.ZERO, .1)
 

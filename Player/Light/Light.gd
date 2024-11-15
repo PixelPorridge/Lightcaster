@@ -15,7 +15,6 @@ extends CharacterBody2D
 
 
 func _physics_process(delta: float) -> void:
-
 	# --- Move Light ---
 
 	velocity = Vector2(speed, 0).rotated(rotation)
@@ -28,12 +27,8 @@ func _physics_process(delta: float) -> void:
 		# Get collision layer bit
 		var collision_layer_bitmask = PhysicsServer2D.body_get_collision_layer(collision.get_collider_rid())
 
-		# Stop light
-		if collision_layer_bitmask == CollisionLayers.LIGHT_BLOCKER_BITMASK:
-			queue_free()
-
 		# Reflect light
-		elif collision_layer_bitmask == CollisionLayers.LIGHT_REFLECTOR_BITMASK:
+		if collision_layer_bitmask == CollisionLayers.LIGHT_REFLECTOR_BITMASK:
 			var reflect = collision.get_remainder().bounce(collision.get_normal())
 			rotation = reflect.angle()
 
@@ -47,6 +42,18 @@ func _physics_process(delta: float) -> void:
 		
 			# Play random sound
 			audio_stream_player.play()
+		
+		# Stop light
+		elif collision_layer_bitmask == CollisionLayers.LIGHT_BLOCKER_BITMASK:
+			queue_free()
+		
+		# Try deactivate enemy
+		elif collision_layer_bitmask == CollisionLayers.ENEMY_BITMASK:
+			var enemy: Enemy = collision.get_collider()
+
+			enemy.try_deactivate()
+
+			queue_free()
 		
 	# Instantiate light ghost
 	var light_ghost: Node2D = light_ghost_scene.instantiate()

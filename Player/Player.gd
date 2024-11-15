@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var guides_animation_tree: AnimationTree
 @export var holdable_check_area: Area2D
 @export var holdable_position: Node2D
+@export var detection_area: Area2D
 @export var level: Level
 
 @export_group("Audio")
@@ -31,12 +32,13 @@ enum LightState {
 
 @export_group("Movement")
 @export var speed: float
+@export var input_enabled := true
 
 
 func _physics_process(delta: float) -> void:
 	# --- Movement ---
 
-	var direction := Input.get_vector(InputMapActions.LEFT, InputMapActions.RIGHT, InputMapActions.UP, InputMapActions.DOWN)
+	var direction := Input.get_vector(InputMapActions.LEFT, InputMapActions.RIGHT, InputMapActions.UP, InputMapActions.DOWN) if input_enabled else Vector2.ZERO
 
 	velocity.x = direction.x * speed;
 	velocity.y = direction.y * speed;
@@ -53,12 +55,12 @@ func _physics_process(delta: float) -> void:
 	# --- Shoot Light ---
 
 	# Begin aiming light
-	if Input.is_action_pressed(InputMapActions.SHOOT) && light_state == LightState.READY && !mirror && level.light_shots > 0:
+	if Input.is_action_pressed(InputMapActions.SHOOT) && light_state == LightState.READY && !mirror && level.light_shots > 0 && input_enabled:
 		light_state = LightState.AIMING
 		trajectory_line.visible = true
 
 	# Shoot light after aimed
-	if Input.is_action_just_released(InputMapActions.SHOOT) && light_state == LightState.AIMING && !mirror:
+	if Input.is_action_just_released(InputMapActions.SHOOT) && light_state == LightState.AIMING && !mirror && input_enabled:
 
 		# Instantiate light
 		var light: Light = light_scene.instantiate()
@@ -89,7 +91,7 @@ func _physics_process(delta: float) -> void:
 	# --- Holdable Mirrors ---
 
 	# Pickup mirror
-	if Input.is_action_just_pressed(InputMapActions.PICKUP) && !mirror:
+	if Input.is_action_just_pressed(InputMapActions.PICKUP) && !mirror && light_state == LightState.READY && input_enabled:
 		if holdable_check_area.get_overlapping_areas():
 			mirror = holdable_check_area.get_overlapping_areas()[0].get_parent()
 			mirror.holdable_area.set_collision_mask_value(CollisionLayers.PLAYER_HOLDABLE_CHECK_LAYER, false)
@@ -97,15 +99,15 @@ func _physics_process(delta: float) -> void:
 			light_state = LightState.AIMING
 	
 	# Rotate mirror
-	if Input.is_action_pressed(InputMapActions.ROTATE_LEFT) && mirror:
+	if Input.is_action_pressed(InputMapActions.ROTATE_LEFT) && mirror && input_enabled:
 		mirror.rotate_mirror(-2 * delta)
 	
 	# Rotate mirror
-	if Input.is_action_pressed(InputMapActions.ROTATE_RIGHT) && mirror:
+	if Input.is_action_pressed(InputMapActions.ROTATE_RIGHT) && mirror && input_enabled:
 		mirror.rotate_mirror(2 * delta)
 	
 	# Throw mirror
-	if Input.is_action_just_released(InputMapActions.PICKUP) && mirror:
+	if Input.is_action_just_released(InputMapActions.PICKUP) && mirror && input_enabled:
 		mirror.holdable_area.set_collision_mask_value(CollisionLayers.PLAYER_HOLDABLE_CHECK_LAYER, true)
 		mirror.velocity = (get_global_mouse_position() - holdable_position.global_position) * 2
 

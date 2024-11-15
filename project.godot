@@ -107,6 +107,9 @@ restart_level={
 2d_physics/layer_6="Holdable"
 2d_physics/layer_7="Player Holdable Check"
 2d_physics/layer_8="Void"
+2d_physics/layer_9="Player Detection"
+2d_physics/layer_10="Detector Blocker"
+2d_physics/layer_11="Enemy"
 
 [physics]
 

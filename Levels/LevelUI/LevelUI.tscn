@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://mi5eru04odwu"]
+[gd_scene load_steps=6 format=3 uid="uid://mi5eru04odwu"]
 
 [ext_resource type="Script" path="res://Levels/LevelUI/LevelUI.gd" id="1_a1pir"]
 [ext_resource type="PackedScene" uid="uid://dbooybtww6khe" path="res://Levels/LevelUI/LightShotIcon/LightShotIcon.tscn" id="2_o0xan"]
@@ -22,100 +22,9 @@ base_font = ExtResource("3_qjmjq")
 spacing_top = -4
 spacing_bottom = -5
 
-[sub_resource type="Animation" id="Animation_h2e3e"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_8jfkx"]
-resource_name = "appear"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"faded_to_black"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_mimv2"]
-resource_name = "disappear"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8b3g"]
-_data = {
-"RESET": SubResource("Animation_h2e3e"),
-"appear": SubResource("Animation_8jfkx"),
-"disappear": SubResource("Animation_mimv2")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7p2lh"]
-animation = &"appear"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_06a3s"]
-animation = &"disappear"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yb412"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0smm0"]
-advance_mode = 2
-advance_condition = &"level_finished"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_a8lal"]
-states/appear/node = SubResource("AnimationNodeAnimation_7p2lh")
-states/appear/position = Vector2(582, 100)
-states/disappear/node = SubResource("AnimationNodeAnimation_06a3s")
-states/disappear/position = Vector2(388, 100)
-transitions = ["Start", "disappear", SubResource("AnimationNodeStateMachineTransition_yb412"), "disappear", "appear", SubResource("AnimationNodeStateMachineTransition_0smm0")]
-graph_offset = Vector2(-140, -33)
-
-[node name="LevelUI" type="CanvasLayer" node_paths=PackedStringArray("black_animation_tree", "light_shots_ui", "light_shots_hbox", "level_title_ui", "level_title_label")]
+[node name="LevelUI" type="CanvasLayer" node_paths=PackedStringArray("black_ui", "light_shots_ui", "light_shots_hbox", "level_title_ui", "level_title_label")]
 script = ExtResource("1_a1pir")
-black_animation_tree = NodePath("Control/Black/AnimationTree")
+black_ui = NodePath("Control/Black")
 light_shot_icon_scene = ExtResource("2_o0xan")
 light_shots_ui = NodePath("Control/LightShots")
 light_shots_hbox = NodePath("Control/LightShots/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer")
@@ -202,6 +111,7 @@ theme_override_font_sizes/font_size = 8
 text = "LEVEL UNKOWN"
 
 [node name="Black" type="ColorRect" parent="Control"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -209,14 +119,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Black"]
-libraries = {
-"": SubResource("AnimationLibrary_i8b3g")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="Control/Black"]
-tree_root = SubResource("AnimationNodeStateMachine_a8lal")
-advance_expression_base_node = NodePath("../../..")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/level_finished = false

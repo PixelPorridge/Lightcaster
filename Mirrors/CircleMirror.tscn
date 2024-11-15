@@ -224,7 +224,7 @@ graph_offset = Vector2(-115, -37)
 
 [node name="CircleMirror" type="CharacterBody2D" node_paths=PackedStringArray("holdable_area", "void_check_area", "sprite", "collider", "animation_tree")]
 collision_layer = 16
-collision_mask = 24
+collision_mask = 1048
 script = ExtResource("1_40ib5")
 holdable_area = NodePath("Holdable")
 void_check_area = NodePath("VoidCheck")

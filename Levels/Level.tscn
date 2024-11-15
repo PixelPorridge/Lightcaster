@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://dk4d088v27i7y"]
+
+[ext_resource type="Script" path="res://Levels/Level.gd" id="1_h0358"]
+[ext_resource type="PackedScene" uid="uid://mi5eru04odwu" path="res://Levels/LevelUI/LevelUI.tscn" id="2_jsgls"]
+[ext_resource type="PackedScene" uid="uid://cca8115pbgr0v" path="res://Levels/LevelEnd/LevelEnd.tscn" id="3_g2dsr"]
+[ext_resource type="TileSet" uid="uid://lk8ohu2afxbm" path="res://TileSets/TileSet.tres" id="4_rf4ma"]
+[ext_resource type="PackedScene" uid="uid://d23rgeeq70rmq" path="res://Player/Player.tscn" id="5_mrw3e"]
+
+[sub_resource type="Gradient" id="Gradient_c8opo"]
+colors = PackedColorArray(0, 0, 0, 1, 0.832652, 0.873391, 0.93153, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7wx3n"]
+gradient = SubResource("Gradient_c8opo")
+
+[sub_resource type="Environment" id="Environment_pj4va"]
+background_mode = 3
+glow_enabled = true
+glow_levels/3 = 1.5
+glow_intensity = 0.2
+glow_blend_mode = 1
+glow_hdr_threshold = 0.1
+adjustment_color_correction = SubResource("GradientTexture1D_7wx3n")
+
+[sub_resource type="Gradient" id="Gradient_b0psl"]
+offsets = PackedFloat32Array(0, 0.687251)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hdwhs"]
+gradient = SubResource("Gradient_b0psl")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("level_ui", "player", "camera", "alarm_light")]
+script = ExtResource("1_h0358")
+level_title = "Level Unknown"
+light_shots = 3
+level_ui = NodePath("LevelUI")
+player = NodePath("Player")
+camera = NodePath("Camera2D")
+alarm_light = NodePath("AlarmLight")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(128, 72)
+process_callback = 0
+
+[node name="LevelUI" parent="." node_paths=PackedStringArray("level") instance=ExtResource("2_jsgls")]
+level = NodePath("..")
+
+[node name="LevelEnd" parent="." node_paths=PackedStringArray("level") instance=ExtResource("3_g2dsr")]
+level = NodePath("..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pj4va")
+
+[node name="AlarmLight" type="DirectionalLight2D" parent="."]
+color = Color(1, 0, 0, 1)
+energy = 0.0
+
+[node name="PointLight2DUltimateFix" type="PointLight2D" parent="."]
+visible = false
+energy = 8.47
+texture = SubResource("GradientTexture2D_hdwhs")
+
+[node name="TileMap" type="Node2D" parent="."]
+
+[node name="World" type="TileMapLayer" parent="TileMap"]
+use_parent_material = true
+tile_set = ExtResource("4_rf4ma")
+
+[node name="Darkness" type="TileMapLayer" parent="TileMap"]
+use_parent_material = true
+tile_set = ExtResource("4_rf4ma")
+
+[node name="Player" parent="." node_paths=PackedStringArray("level") instance=ExtResource("5_mrw3e")]
+z_index = 1
+level = NodePath("..")

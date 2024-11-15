@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1v4p8r3yp0x8"
-path="res://.godot/imported/EnemyLight.png-dd42688314a2c120a36928a7640a2d76.ctex"
+uid="uid://dv1smkakxe6wx"
+path="res://.godot/imported/EnemyLight.png-d64afa52a6ac52218875fc3c72810410.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/EnemyLight.png"
-dest_files=["res://.godot/imported/EnemyLight.png-dd42688314a2c120a36928a7640a2d76.ctex"]
+source_file="res://Enemies/EnemyLight/EnemyLight.png"
+dest_files=["res://.godot/imported/EnemyLight.png-d64afa52a6ac52218875fc3c72810410.ctex"]
 
 [params]
 
