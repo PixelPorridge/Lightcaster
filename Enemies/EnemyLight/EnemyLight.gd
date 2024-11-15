@@ -15,7 +15,7 @@ func _ready() -> void:
 	# Disable wall collision for raycasts
 	for ray_cast in ray_casts:
 		ray_cast.set_collision_mask_value(CollisionLayers.DETECTOR_BLOCKER_LAYER, false)
-		
+
 
 func _physics_process(_delta: float) -> void:
 	# Check for collision with each raycast
@@ -33,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 
 			# Enemy handles catching of player
 			enemy.catch_player()
-			
+
 			break
 
 

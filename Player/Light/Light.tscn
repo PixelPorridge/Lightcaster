@@ -34,7 +34,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Light" type="CharacterBody2D" node_paths=PackedStringArray("audio_stream_player")]
 collision_layer = 4
-collision_mask = 1048
+collision_mask = 3096
 script = ExtResource("1_tksjr")
 impact_scene = ExtResource("2_8vx1d")
 light_ghost_scene = ExtResource("3_t2kkb")

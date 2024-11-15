@@ -277,7 +277,7 @@ transitions = ["Start", "Deactivate", SubResource("AnimationNodeStateMachineTran
 graph_offset = Vector2(-214, -132)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5iowg"]
-graph_offset = Vector2(0, -28)
+graph_offset = Vector2(-641.65, -171.78)
 nodes/Spin/node = SubResource("AnimationNodeAnimation_an3cr")
 nodes/Spin/position = Vector2(-440, -40)
 nodes/SpinAddState/node = SubResource("AnimationNodeAdd2_i6ptp")
@@ -289,24 +289,24 @@ nodes/StateMachine/position = Vector2(-160, 200)
 nodes/output/position = Vector2(360, 120)
 node_connections = [&"SpinAddState", 0, &"SpinTimeScale", &"SpinAddState", 1, &"StateMachine", &"SpinTimeScale", 0, &"Spin", &"output", 0, &"SpinAddState"]
 
-[sub_resource type="Gradient" id="Gradient_ipsy7"]
+[sub_resource type="Gradient" id="Gradient_tvy1f"]
 offsets = PackedFloat32Array(0, 0.697211)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rgfgx"]
-gradient = SubResource("Gradient_ipsy7")
+gradient = SubResource("Gradient_tvy1f")
 width = 48
 height = 48
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="StationaryEnemy" type="CharacterBody2D"]
-disable_mode = 1
+[node name="StationaryEnemy" type="StaticBody2D"]
 collision_layer = 1024
 collision_mask = 0
 script = ExtResource("1_32cs8")
 
 [node name="Feet" type="Sprite2D" parent="."]
+z_index = -1
 texture = SubResource("AtlasTexture_i8dfk")
 
 [node name="Spinning" type="Node2D" parent="."]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Reflections"
-run/main_scene="res://Levels/Level1.tscn"
+run/main_scene="res://Levels/Level2.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Player/PlayerBig.png"
 
@@ -115,6 +115,7 @@ close_game={
 2d_physics/layer_9="Player Detection"
 2d_physics/layer_10="Detector Blocker"
 2d_physics/layer_11="Enemy"
+2d_physics/layer_12="Charger"
 
 [physics]
 

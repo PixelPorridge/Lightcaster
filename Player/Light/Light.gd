@@ -23,6 +23,13 @@ func _physics_process(delta: float) -> void:
 	# --- Collision Detection ---
 
 	if collision:
+		# Instantiate impact
+		var impact: Node2D = impact_scene.instantiate()
+
+		impact.global_position = global_position
+		impact.global_rotation = randf() * 2 * PI
+
+		get_tree().current_scene.add_child(impact)
 		
 		# Get collision layer bit
 		var collision_layer_bitmask = PhysicsServer2D.body_get_collision_layer(collision.get_collider_rid())
@@ -31,14 +38,6 @@ func _physics_process(delta: float) -> void:
 		if collision_layer_bitmask == CollisionLayers.LIGHT_REFLECTOR_BITMASK:
 			var reflect = collision.get_remainder().bounce(collision.get_normal())
 			rotation = reflect.angle()
-
-			# Instantiate impact
-			var impact: Node2D = impact_scene.instantiate()
-
-			impact.global_position = global_position
-			impact.global_rotation = randf() * 2 * PI
-
-			get_tree().current_scene.add_child(impact)
 		
 			# Play random sound
 			audio_stream_player.play()
@@ -52,6 +51,14 @@ func _physics_process(delta: float) -> void:
 			var enemy: Enemy = collision.get_collider()
 
 			enemy.try_deactivate()
+
+			queue_free()
+		
+		# Destroy charger
+		elif collision_layer_bitmask == CollisionLayers.CHARGER_BITMASK:
+			var charger: Charger = collision.get_collider()
+
+			charger.deactivate()
 
 			queue_free()
 		

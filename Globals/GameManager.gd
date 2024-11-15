@@ -2,8 +2,9 @@ extends Node2D
 
 var current_level = 0
 var levels: Array[PackedScene] = [
-	preload("res://Levels/Level1.tscn"),
-	preload("res://Levels/Level2.tscn")
+	preload("res://Levels/Level2.tscn"),
+	preload("res://Levels/Level3.tscn"),
+	preload("res://Levels/Level1.tscn")
 ]
 
 

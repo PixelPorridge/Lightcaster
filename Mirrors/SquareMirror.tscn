@@ -235,7 +235,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="SquareMirror" type="CharacterBody2D" node_paths=PackedStringArray("holdable_area", "void_check_area", "sprite", "collider", "animation_tree")]
 collision_layer = 16
-collision_mask = 1048
+collision_mask = 3096
 script = ExtResource("1_1645o")
 holdable_area = NodePath("Holdable")
 void_check_area = NodePath("VoidCheck")
