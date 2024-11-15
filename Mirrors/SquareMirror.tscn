@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bggtr3kt4imvo"]
+[gd_scene load_steps=22 format=3 uid="uid://bggtr3kt4imvo"]
 
 [ext_resource type="Script" path="res://Mirrors/Mirror.gd" id="1_1645o"]
 [ext_resource type="Texture2D" uid="uid://b85lxcb7sgdy7" path="res://Mirrors/Mirrors.png" id="2_xcnlm"]
@@ -222,6 +222,17 @@ states/Far/position = Vector2(358, 100)
 transitions = ["Start", "Far", SubResource("AnimationNodeStateMachineTransition_cq3q6"), "Far", "Close", SubResource("AnimationNodeStateMachineTransition_yguit"), "Close", "Far", SubResource("AnimationNodeStateMachineTransition_ovkcf"), "Far", "Fall", SubResource("AnimationNodeStateMachineTransition_du2oa"), "Close", "Fall", SubResource("AnimationNodeStateMachineTransition_28muf")]
 graph_offset = Vector2(-115, -37)
 
+[sub_resource type="Gradient" id="Gradient_rwtek"]
+offsets = PackedFloat32Array(0, 0.697211)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lvvid"]
+gradient = SubResource("Gradient_rwtek")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="SquareMirror" type="CharacterBody2D" node_paths=PackedStringArray("holdable_area", "void_check_area", "sprite", "collider", "animation_tree")]
 collision_layer = 16
 collision_mask = 1048
@@ -267,6 +278,11 @@ tree_root = SubResource("AnimationNodeStateMachine_i2wt5")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/falling = false
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -4)
+energy = 0.3
+texture = SubResource("GradientTexture2D_lvvid")
 
 [connection signal="area_entered" from="Holdable" to="." method="_on_holdable_area_entered"]
 [connection signal="area_exited" from="Holdable" to="." method="_on_holdable_area_exited"]

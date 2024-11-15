@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dlb1tb67slng8"]
+[gd_scene load_steps=14 format=3 uid="uid://dlb1tb67slng8"]
 
 [ext_resource type="Texture2D" uid="uid://61ao5id71cly" path="res://Player/Light/Light.png" id="1_frq7v"]
 [ext_resource type="Script" path="res://Player/Light/Light.gd" id="1_tksjr"]
@@ -20,6 +20,17 @@ stream_1/stream = ExtResource("6_vjx57")
 stream_2/stream = ExtResource("7_sajtv")
 stream_3/stream = ExtResource("8_5vubx")
 stream_4/stream = ExtResource("9_65aul")
+
+[sub_resource type="Gradient" id="Gradient_qx6k4"]
+offsets = PackedFloat32Array(0, 0.697211)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hwkua"]
+gradient = SubResource("Gradient_qx6k4")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Light" type="CharacterBody2D" node_paths=PackedStringArray("audio_stream_player")]
 collision_layer = 4
@@ -44,5 +55,10 @@ autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_mfx53")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_hwkua")
 
 [connection signal="timeout" from="LifetimeTimer" to="." method="_on_lifetime_timer_timeout"]

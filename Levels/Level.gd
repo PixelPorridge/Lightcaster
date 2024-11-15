@@ -52,5 +52,5 @@ func catch_player(enemy: Enemy):
 	# Alarm light
 	var tween_alarm_light = get_tree().current_scene.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_loops(4)
 
-	tween_alarm_light.tween_property(alarm_light, "energy", 1.5, .4)
-	tween_alarm_light.tween_property(alarm_light, "energy", .5, .4)
+	tween_alarm_light.tween_property(alarm_light, "energy", 1, .4)
+	tween_alarm_light.tween_property(alarm_light, "energy", .3, .4)

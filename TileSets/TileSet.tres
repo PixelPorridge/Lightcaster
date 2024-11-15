@@ -317,6 +317,7 @@ texture_region_size = Vector2i(12, 12)
 0:8/0/physics_layer_2/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 2, -6, 2)
 0:8/0/physics_layer_4/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, -3, -6, -3)
 6:5/0 = 0
+6:5/0/z_index = -100
 6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
 6:5/0/physics_layer_3/polygon_0/points = PackedVector2Array(6, -6, 6, 6, -6, 6, -6, -6)
 6:0/0 = 0

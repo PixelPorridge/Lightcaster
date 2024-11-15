@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Enemies/EnemyLight/EnemyLight.gd" id="2_ktk48"]
 
 [node name="EnemyLight" type="PointLight2D" node_paths=PackedStringArray("ray_casts")]
-color = Color(1, 0, 0, 1)
+color = Color(0.933333, 0.141176, 0.239216, 1)
 energy = 3.0
 shadow_enabled = true
 texture = ExtResource("1_mkv3a")

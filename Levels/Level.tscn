@@ -1,10 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://dk4d088v27i7y"]
+[gd_scene load_steps=13 format=3 uid="uid://dk4d088v27i7y"]
 
 [ext_resource type="Script" path="res://Levels/Level.gd" id="1_h0358"]
 [ext_resource type="PackedScene" uid="uid://mi5eru04odwu" path="res://Levels/LevelUI/LevelUI.tscn" id="2_jsgls"]
 [ext_resource type="PackedScene" uid="uid://cca8115pbgr0v" path="res://Levels/LevelEnd/LevelEnd.tscn" id="3_g2dsr"]
 [ext_resource type="TileSet" uid="uid://lk8ohu2afxbm" path="res://TileSets/TileSet.tres" id="4_rf4ma"]
+[ext_resource type="Texture2D" uid="uid://cu0tui8hau1i" path="res://TileSets/TileSet.png" id="4_vr65g"]
 [ext_resource type="PackedScene" uid="uid://d23rgeeq70rmq" path="res://Player/Player.tscn" id="5_mrw3e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28j44"]
+atlas = ExtResource("4_vr65g")
+region = Rect2(72, 0, 12, 12)
 
 [sub_resource type="Gradient" id="Gradient_c8opo"]
 colors = PackedColorArray(0, 0, 0, 1, 0.832652, 0.873391, 0.93153, 1)
@@ -41,6 +46,12 @@ player = NodePath("Player")
 camera = NodePath("Camera2D")
 alarm_light = NodePath("AlarmLight")
 
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1000
+scale = Vector2(5000, 5000)
+texture = SubResource("AtlasTexture_28j44")
+metadata/_edit_lock_ = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(128, 72)
 process_callback = 0
@@ -53,6 +64,11 @@ level = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pj4va")
+
+[node name="DarkLight" type="DirectionalLight2D" parent="."]
+color = Color(0.571465, 0.482015, 0.418004, 1)
+energy = 0.5
+blend_mode = 1
 
 [node name="AlarmLight" type="DirectionalLight2D" parent="."]
 color = Color(1, 0, 0, 1)
