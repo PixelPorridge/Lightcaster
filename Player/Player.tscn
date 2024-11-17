@@ -15,6 +15,14 @@
 [ext_resource type="AudioStream" uid="uid://dm8y4bugklywq" path="res://Sound/Shoot/impactGlass_heavy_003.ogg" id="10_afm8t"]
 [ext_resource type="AudioStream" uid="uid://d3p767xums6tx" path="res://Sound/Shoot/impactGlass_heavy_004.ogg" id="11_muco4"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aoban"]
+streams_count = 5
+stream_0/stream = ExtResource("7_28x4k")
+stream_1/stream = ExtResource("8_0qdv7")
+stream_2/stream = ExtResource("9_ggj11")
+stream_3/stream = ExtResource("10_afm8t")
+stream_4/stream = ExtResource("11_muco4")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_nictp"]
 radius = 6.0
 
@@ -307,14 +315,6 @@ states/Start/position = Vector2(188, 84)
 transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_iaww7")]
 graph_offset = Vector2(-332, -98)
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aoban"]
-streams_count = 5
-stream_0/stream = ExtResource("7_28x4k")
-stream_1/stream = ExtResource("8_0qdv7")
-stream_2/stream = ExtResource("9_ggj11")
-stream_3/stream = ExtResource("10_afm8t")
-stream_4/stream = ExtResource("11_muco4")
-
 [sub_resource type="Gradient" id="Gradient_6m5db"]
 offsets = PackedFloat32Array(0, 0.697211)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -326,7 +326,7 @@ height = 48
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "flippable", "target_sprite", "trajectory_line", "guides_animation_tree", "holdable_check_area", "holdable_position", "detection_area", "audio_stream_player", "light_spawn_position")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "flippable", "target_sprite", "trajectory_line", "guides_animation_tree", "holdable_check_area", "holdable_position", "detection_area", "light_spawn_position")]
 collision_layer = 2
 collision_mask = 3073
 script = ExtResource("1_x65ow")
@@ -338,7 +338,7 @@ guides_animation_tree = NodePath("Guides/AnimationTree")
 holdable_check_area = NodePath("HoldableCheck")
 holdable_position = NodePath("Flippable/HoldablePosition")
 detection_area = NodePath("Detection")
-audio_stream_player = NodePath("AudioStreamPlayer2D")
+shoot_audio_stream = SubResource("AudioStreamRandomizer_aoban")
 light_scene = ExtResource("2_2hmrh")
 light_spawn_position = NodePath("Flippable/LightSpawnPosition")
 impact_scene = ExtResource("3_pkmvm")
@@ -435,9 +435,6 @@ advance_expression_base_node = NodePath("../..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/BlendTree/SpinAddScale/add_amount = 1.0
 parameters/BlendTree/SpinTimeScale/scale = 1.0
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_aoban")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -4)

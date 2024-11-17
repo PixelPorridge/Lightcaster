@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dk4d088v27i7y"]
+[gd_scene load_steps=15 format=3 uid="uid://bi42ojc23bt54"]
 
 [ext_resource type="Script" path="res://Levels/Level.gd" id="1_h0358"]
+[ext_resource type="AudioStream" uid="uid://bwns0wubp2j61" path="res://Sound/EditedEngine/spaceEngine_000.ogg" id="2_ev503"]
 [ext_resource type="PackedScene" uid="uid://mi5eru04odwu" path="res://Levels/LevelUI/LevelUI.tscn" id="2_jsgls"]
 [ext_resource type="PackedScene" uid="uid://cca8115pbgr0v" path="res://Levels/LevelEnd/LevelEnd.tscn" id="3_g2dsr"]
 [ext_resource type="TileSet" uid="uid://lk8ohu2afxbm" path="res://TileSets/TileSet.tres" id="4_rf4ma"]
@@ -45,6 +46,7 @@ light_shots = 3
 level_ui = NodePath("LevelUI")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
+alarm_audio_stream = ExtResource("2_ev503")
 alarm_light = NodePath("AlarmLight")
 
 [node name="Background" type="Sprite2D" parent="."]

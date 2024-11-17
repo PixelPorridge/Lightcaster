@@ -8,8 +8,14 @@ extends Node2D
 
 @export var player: Player
 @export var camera: Camera2D
+@export var alarm_audio_stream: AudioStream
 
 @export var alarm_light: DirectionalLight2D
+
+func _process(_delta: float) -> void:
+	# Restart current level
+	if (Input.is_action_just_pressed(InputMapActions.RESTART_LEVEL)):
+		get_tree().reload_current_scene()
 
 
 func use_light_shot():
@@ -34,6 +40,9 @@ func restart_level():
 
 
 func catch_player(enemy: Enemy):
+	# Play alarm audio
+	GameManager.play_audio_stream(alarm_audio_stream, enemy.global_position, -4)
+
 	# Camera position is between player and enemy
 	var camera_position = player.global_position.lerp(enemy.global_position, 0.5)
 

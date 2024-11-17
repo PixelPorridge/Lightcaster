@@ -26,11 +26,12 @@ func _physics_process(delta: float) -> void:
 
 	if collision:
 		velocity = velocity.bounce(collision.get_normal())
-	
+
+
 	if (velocity.length() < 5 && void_check_area.get_overlapping_bodies()):
 		animation_tree["parameters/conditions/falling"] = true
-		
-		
+
+
 func rotate_mirror(radians: float):
 	sprite.rotate(radians)
 	collider.rotate(radians)

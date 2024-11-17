@@ -71,6 +71,7 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_6xnxt")
 theme_override_font_sizes/font_size = 8
 text = "LIGHT"
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/LightShots/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -109,6 +110,7 @@ size_flags_horizontal = 8
 theme_override_fonts/font = SubResource("FontVariation_6xnxt")
 theme_override_font_sizes/font_size = 8
 text = "LEVEL UNKOWN"
+uppercase = true
 
 [node name="Black" type="ColorRect" parent="Control"]
 modulate = Color(1, 1, 1, 0)

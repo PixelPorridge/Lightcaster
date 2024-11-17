@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://hao6g8jefx6g"]
+[gd_scene load_steps=23 format=3 uid="uid://hao6g8jefx6g"]
 
 [ext_resource type="Texture2D" uid="uid://bf4jpxmouel03" path="res://Enemies/EnemyCharger/EnemyCharger.png" id="1_i0g11"]
 [ext_resource type="Script" path="res://Enemies/EnemyCharger/EnemyCharger.gd" id="1_rj5m5"]
 [ext_resource type="Texture2D" uid="uid://dosmhlfdr1q7a" path="res://Enemies/EnemyCharger/ChargingLine.png" id="3_m33ib"]
 [ext_resource type="Shader" path="res://Shaders/Trajectory.gdshader" id="3_wnviw"]
+[ext_resource type="AudioStream" uid="uid://by72oeky8octs" path="res://Sound/EditedEngine/spaceEngineSmall_002.ogg" id="5_pjbrh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_25cm6"]
 atlas = ExtResource("1_i0g11")
@@ -29,36 +30,6 @@ width = 48
 height = 48
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="Animation" id="Animation_ius6p"]
-resource_name = "spin"
-length = 2.0
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Spinner:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -6.28144]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Head:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 6.28144]
-}
 
 [sub_resource type="Animation" id="Animation_wqrp4"]
 length = 0.001
@@ -146,6 +117,30 @@ tracks/6/keys = {
 "update": 0,
 "values": [1.5]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer2D:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-16.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer2D:pitch_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_wc8k7"]
 resource_name = "deactivate"
@@ -211,6 +206,74 @@ tracks/4/keys = {
 "update": 0,
 "values": [1.5, 0.0]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [-16.0, -80.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2D:pitch_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [1.0, 0.01]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer2D")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ius6p"]
+resource_name = "spin"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spinner:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28144]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28144]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dnpwa"]
 _data = {
@@ -240,7 +303,7 @@ transitions = ["Start", "Deactivate", SubResource("AnimationNodeStateMachineTran
 graph_offset = Vector2(-22, -130)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mom85"]
-graph_offset = Vector2(-719.971, -105.17)
+graph_offset = Vector2(-420, 0)
 nodes/Spin/node = SubResource("AnimationNodeAnimation_j64ow")
 nodes/Spin/position = Vector2(-420, 40)
 nodes/SpinAddState/node = SubResource("AnimationNodeAdd2_11cjq")
@@ -293,3 +356,8 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/SpinAddState/add_amount = 1.0
 parameters/SpinTimeScale/scale = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_pjbrh")
+volume_db = -16.0
+autoplay = true

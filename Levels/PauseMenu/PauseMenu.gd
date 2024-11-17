@@ -56,6 +56,9 @@ func _on_resume_pressed() -> void:
 
 
 func _on_restart_level_pressed() -> void:
+	# Hide mouse cursor
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 	# Unpause game
 	get_tree().paused = false
 	
@@ -64,6 +67,9 @@ func _on_restart_level_pressed() -> void:
 
 
 func _on_previous_level_pressed() -> void:
+	# Hide mouse cursor
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 	# Unpause game
 	get_tree().paused = false
 
@@ -72,6 +78,9 @@ func _on_previous_level_pressed() -> void:
 
 
 func _on_restart_game_pressed() -> void:
+	# Hide mouse cursor
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	# Unpause game
 	get_tree().paused = false
 

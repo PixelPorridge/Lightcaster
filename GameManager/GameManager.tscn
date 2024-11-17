@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq642qjk6h0w5"]
+
+[ext_resource type="Script" path="res://GameManager/GameManager.gd" id="1_tui63"]
+[ext_resource type="AudioStream" uid="uid://ca7e8eav6w01y" path="res://Sound/Music/within the abandoned castle V2.ogg" id="2_c66au"]
+[ext_resource type="AudioStream" uid="uid://dma8ydaetg7l8" path="res://Sound/Music/530161__flamiffer__dungeon-air.ogg" id="3_og2e8"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_tui63")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_c66au")
+autoplay = true
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_og2e8")
+volume_db = -16.0
+autoplay = true

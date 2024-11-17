@@ -13,7 +13,7 @@ extends CharacterBody2D
 @export var level: Level
 
 @export_group("Audio")
-@export var audio_stream_player: AudioStreamPlayer2D
+@export var shoot_audio_stream: AudioStream
 
 @export_group("Light")
 @export var light_scene: PackedScene
@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		flippable.scale.x = 1
 	elif direction.x < 0:
 		flippable.scale.x = -1
-	
+
 	# --- Shoot Light ---
 
 	# Begin aiming light
@@ -79,7 +79,7 @@ func _physics_process(delta: float) -> void:
 		get_tree().current_scene.add_child(impact)
 
 		# Play random shoot sound
-		audio_stream_player.play()
+		GameManager.play_audio_stream(shoot_audio_stream, global_position)
 
 		# Notify level to use light shot
 		level.use_light_shot()
@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 		light_state = LightState.READY
 		trajectory_line.visible = false
 
-		
+
 	# --- Holdable Mirrors ---
 
 	# Pickup mirror
@@ -97,15 +97,15 @@ func _physics_process(delta: float) -> void:
 			mirror.holdable_area.set_collision_mask_value(CollisionLayers.PLAYER_HOLDABLE_CHECK_LAYER, false)
 
 			light_state = LightState.AIMING
-	
+
 	# Rotate mirror
 	if Input.is_action_pressed(InputMapActions.ROTATE_LEFT) && mirror && input_enabled:
 		mirror.rotate_mirror(-2 * delta)
-	
+
 	# Rotate mirror
 	if Input.is_action_pressed(InputMapActions.ROTATE_RIGHT) && mirror && input_enabled:
 		mirror.rotate_mirror(2 * delta)
-	
+
 	# Throw mirror
 	if Input.is_action_just_released(InputMapActions.PICKUP) && mirror && input_enabled:
 		mirror.holdable_area.set_collision_mask_value(CollisionLayers.PLAYER_HOLDABLE_CHECK_LAYER, true)
