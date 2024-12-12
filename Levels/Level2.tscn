@@ -4,8 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bnfyg5tlvncix" path="res://Enemies/StationaryEnemy/StationaryEnemy.tscn" id="4_kxhsi"]
 [ext_resource type="PackedScene" uid="uid://hao6g8jefx6g" path="res://Enemies/EnemyCharger/EnemyCharger.tscn" id="5_ptlrk"]
 
-[node name="Level2" instance=ExtResource("1_i8775")]
+[node name="Level" instance=ExtResource("1_i8775")]
 level_title = "Level 2"
+level_info = "Some enemies are powered by chargers"
 
 [node name="LevelEnd" parent="." index="4"]
 position = Vector2(228, 72)

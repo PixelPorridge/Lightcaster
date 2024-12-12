@@ -1,5 +1,7 @@
 extends Node
 
+var main_menu_scene := preload("res://MainMenu/MainMenu.tscn")
+
 var current_level = 0
 var levels: Array[PackedScene] = [
 	preload("res://Levels/Level1.tscn"),
@@ -12,6 +14,9 @@ var levels: Array[PackedScene] = [
 	preload("res://Levels/Level8.tscn"),
 	preload("res://Levels/Level9.tscn"),
 	preload("res://Levels/Level10.tscn"),
+	preload("res://Levels/Level11.tscn"),
+	preload("res://Levels/Level12.tscn"),
+	preload("res://Levels/Level13.tscn"),
 	preload("res://Levels/GameFinish.tscn")
 ]
 
@@ -25,17 +30,26 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	pass
-	# Close game on escape
-	#if (Input.is_action_just_pressed(InputMapActions.CLOSE_GAME)):
-	#	get_tree().quit()
+	# Debug only code
+	if OS.is_debug_build():
+		# Close game
+		if (Input.is_action_just_pressed(InputMapActions.CLOSE_GAME)):
+			get_tree().quit()
 
 	# Toggle fullscreen
-	#if (Input.is_action_just_pressed(InputMapActions.TOGGLE_FULLSCREEN)):
-	#	if (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN):
-	#		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	#	else:
-	#		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	if (Input.is_action_just_pressed(InputMapActions.TOGGLE_FULLSCREEN)):
+		if (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN):
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+
+func start_game():
+	# Reset current level
+	current_level = 0
+
+	# Go to first level
+	get_tree().change_scene_to_packed(levels[current_level])
 
 
 func go_to_next_level():
@@ -68,17 +82,34 @@ func restart_game():
 	# Reset current level
 	current_level = 0
 
-	# Go to start of game
-	get_tree().change_scene_to_packed(levels[current_level])
+	# Go to main menu
+	get_tree().change_scene_to_packed(main_menu_scene)
 
 
-func play_audio_stream(audio_stream: AudioStream, at_position: Vector2, volume: float = 0):
-	# Create new audio steam player
+func play_audio_stream_2d(audio_stream: AudioStream, at_position: Vector2, volume: float = 0):
+	# Create new audio steam player 2D
 	var audio_stream_player = AudioStreamPlayer2D.new()
 
 	audio_stream_player.stream = audio_stream
 	audio_stream_player.position = at_position
 	audio_stream_player.volume_db = volume
+	audio_stream_player.bus = "SFX"
+
+	# Queue free after audio is finished
+	audio_stream_player.finished.connect(func(): audio_stream_player.queue_free())
+
+	get_tree().current_scene.add_child(audio_stream_player)
+
+	audio_stream_player.play()
+
+
+func play_audio_stream(audio_stream: AudioStream, volume: float = 0):
+	# Create new audio steam player
+	var audio_stream_player = AudioStreamPlayer.new()
+
+	audio_stream_player.stream = audio_stream
+	audio_stream_player.volume_db = volume
+	audio_stream_player.bus = "SFX"
 
 	# Queue free after audio is finished
 	audio_stream_player.finished.connect(func(): audio_stream_player.queue_free())

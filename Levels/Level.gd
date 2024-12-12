@@ -3,7 +3,9 @@ extends Node2D
 
 @export var level_title: String
 @export_range(0, 100) var light_shots: int
+@export_multiline var level_info: String
 
+@export_group("Nodes")
 @export var level_ui: LevelUI
 
 @export var player: Player
@@ -11,6 +13,11 @@ extends Node2D
 @export var alarm_audio_stream: AudioStream
 
 @export var alarm_light: DirectionalLight2D
+
+
+func _ready() -> void:
+	level_ui.visible = true
+
 
 func _process(_delta: float) -> void:
 	# Restart current level
@@ -41,7 +48,7 @@ func restart_level():
 
 func catch_player(enemy: Enemy):
 	# Play alarm audio
-	GameManager.play_audio_stream(alarm_audio_stream, enemy.global_position, -4)
+	GameManager.play_audio_stream_2d(alarm_audio_stream, enemy.global_position, -4)
 
 	# Camera position is between player and enemy
 	var camera_position = player.global_position.lerp(enemy.global_position, 0.5)

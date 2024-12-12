@@ -66,17 +66,6 @@ func _on_restart_level_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
-func _on_previous_level_pressed() -> void:
-	# Hide mouse cursor
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
-	# Unpause game
-	get_tree().paused = false
-
-	# Go to previous level
-	GameManager.go_to_previous_level()
-
-
 func _on_restart_game_pressed() -> void:
 	# Hide mouse cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

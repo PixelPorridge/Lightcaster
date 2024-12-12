@@ -531,3 +531,4 @@ texture = SubResource("GradientTexture2D_rgfgx")
 stream = ExtResource("5_suu67")
 volume_db = -16.0
 autoplay = true
+bus = &"SFX"

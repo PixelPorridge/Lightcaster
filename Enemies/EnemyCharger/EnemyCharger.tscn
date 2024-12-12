@@ -361,3 +361,4 @@ parameters/SpinTimeScale/scale = 1.0
 stream = ExtResource("5_pjbrh")
 volume_db = -16.0
 autoplay = true
+bus = &"SFX"

@@ -127,22 +127,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_clyhe")
 theme_override_styles/normal = SubResource("StyleBoxFlat_clyhe")
 text = "RESTART LEVEL"
 
-[node name="PreviousLevel" type="Button" parent="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
-layout_mode = 2
-size_flags_vertical = 3
-focus_mode = 0
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("FontVariation_l4hac")
-theme_override_font_sizes/font_size = 8
-theme_override_styles/focus = SubResource("StyleBoxFlat_clyhe")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_clyhe")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_clyhe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_dh6k1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_clyhe")
-theme_override_styles/normal = SubResource("StyleBoxFlat_clyhe")
-text = "PREVIOUS LEVEL"
-
 [node name="RestartGame" type="Button" parent="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -161,5 +145,4 @@ text = "RESTART GAME"
 
 [connection signal="pressed" from="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/RestartLevel" to="." method="_on_restart_level_pressed"]
-[connection signal="pressed" from="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PreviousLevel" to="." method="_on_previous_level_pressed"]
 [connection signal="pressed" from="Control/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/RestartGame" to="." method="_on_restart_game_pressed"]

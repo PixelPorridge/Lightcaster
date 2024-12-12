@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://d23rgeeq70rmq"]
+[gd_scene load_steps=57 format=3 uid="uid://d23rgeeq70rmq"]
 
 [ext_resource type="Texture2D" uid="uid://ubxuatlbd5ev" path="res://Player/Player.png" id="1_iqose"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_x65ow"]
@@ -74,29 +74,24 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sjxrx"]
 animation = &"RESET"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4fs18"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k0x5v"]
 animation = &"move"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jk2pm"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b7esd"]
+graph_offset = Vector2(-471, -83)
+nodes/Move/node = SubResource("AnimationNodeAnimation_k0x5v")
+nodes/Move/position = Vector2(-120, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_jk2pm")
+nodes/TimeScale/position = Vector2(100, 140)
+node_connections = [&"TimeScale", 0, &"Move", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vncy3"]
 animation = &"shoot"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0goo7"]
 advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_njwss"]
-xfade_time = 0.1
-advance_mode = 2
-advance_expression = "velocity"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dsfdh"]
-xfade_time = 0.1
-advance_mode = 2
-advance_expression = "!velocity"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w0rbo"]
-xfade_time = 0.1
-advance_mode = 2
-advance_expression = "Input.is_action_just_released(InputMapActions.SHOOT) && light_state == LightState.AIMING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ulj7s"]
 xfade_time = 0.1
@@ -108,7 +103,22 @@ xfade_time = 0.1
 advance_mode = 2
 advance_expression = "Input.is_action_just_released(InputMapActions.SHOOT) && light_state == LightState.AIMING"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b8ne1"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vcwat"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_81gsc"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "Input.is_action_just_released(InputMapActions.SHOOT) && light_state == LightState.AIMING"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jhw66"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "!velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vee4l"]
 xfade_time = 0.1
 switch_mode = 2
 advance_mode = 2
@@ -116,13 +126,13 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_coql0"]
 states/Idle/node = SubResource("AnimationNodeAnimation_sjxrx")
 states/Idle/position = Vector2(372, 157)
-states/Move/node = SubResource("AnimationNodeAnimation_4fs18")
-states/Move/position = Vector2(526, 45)
+states/Move/node = SubResource("AnimationNodeBlendTree_b7esd")
+states/Move/position = Vector2(520, 25)
 states/Shoot/node = SubResource("AnimationNodeAnimation_vncy3")
-states/Shoot/position = Vector2(576, 198)
+states/Shoot/position = Vector2(575, 198)
 states/Start/position = Vector2(197, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_0goo7"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_njwss"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_dsfdh"), "Move", "Shoot", SubResource("AnimationNodeStateMachineTransition_w0rbo"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_ulj7s"), "Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_ctmn5"), "Shoot", "Move", SubResource("AnimationNodeStateMachineTransition_b8ne1")]
-graph_offset = Vector2(-352, -60)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_0goo7"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_ulj7s"), "Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_ctmn5"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_vcwat"), "Move", "Shoot", SubResource("AnimationNodeStateMachineTransition_81gsc"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_jhw66"), "Shoot", "Move", SubResource("AnimationNodeStateMachineTransition_vee4l")]
+graph_offset = Vector2(-179, -184)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bo1jj"]
 shader = ExtResource("6_o1gb7")
@@ -326,7 +336,7 @@ height = 48
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "flippable", "target_sprite", "trajectory_line", "guides_animation_tree", "holdable_check_area", "holdable_position", "detection_area", "light_spawn_position")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "flippable", "target_sprite", "trajectory_line", "animation_tree", "guides_animation_tree", "holdable_check_area", "holdable_position", "detection_area", "light_spawn_position")]
 collision_layer = 2
 collision_mask = 3073
 script = ExtResource("1_x65ow")
@@ -334,6 +344,7 @@ sprite = NodePath("Flippable/SpritePivot/Sprite2D")
 flippable = NodePath("Flippable")
 target_sprite = NodePath("Guides/Target")
 trajectory_line = NodePath("Guides/Trajectory")
+animation_tree = NodePath("AnimationTree")
 guides_animation_tree = NodePath("Guides/AnimationTree")
 holdable_check_area = NodePath("HoldableCheck")
 holdable_position = NodePath("Flippable/HoldablePosition")
@@ -343,6 +354,7 @@ light_scene = ExtResource("2_2hmrh")
 light_spawn_position = NodePath("Flippable/LightSpawnPosition")
 impact_scene = ExtResource("3_pkmvm")
 speed = 30.0
+sprint_multiplier = 1.5
 
 [node name="Flippable" type="Node2D" parent="."]
 
@@ -393,6 +405,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_coql0")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
+parameters/Move/TimeScale/scale = 1.0
 
 [node name="Guides" type="Node2D" parent="."]
 

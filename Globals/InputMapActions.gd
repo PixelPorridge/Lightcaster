@@ -5,6 +5,7 @@ const RIGHT = "right"
 const UP = "up"
 const DOWN = "down"
 
+const SPRINT = "sprint"
 const SHOOT = "shoot"
 const PICKUP = "pickup"
 
@@ -15,3 +16,4 @@ const CLOSE_GAME = "close_game"
 const TOGGLE_FULLSCREEN = "toggle_fullscreen"
 const RESTART_LEVEL = "restart_level"
 const PAUSE_GAME = "pause_game"
+const CLOSE_INFO = "close_info"

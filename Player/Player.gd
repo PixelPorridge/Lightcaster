@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var flippable: Node2D
 @export var target_sprite: Sprite2D
 @export var trajectory_line: Line2D
+@export var animation_tree: AnimationTree
 @export var guides_animation_tree: AnimationTree
 @export var holdable_check_area: Area2D
 @export var holdable_position: Node2D
@@ -32,6 +33,7 @@ enum LightState {
 
 @export_group("Movement")
 @export var speed: float
+@export var sprint_multiplier: float
 @export var input_enabled := true
 
 
@@ -40,8 +42,16 @@ func _physics_process(delta: float) -> void:
 
 	var direction := Input.get_vector(InputMapActions.LEFT, InputMapActions.RIGHT, InputMapActions.UP, InputMapActions.DOWN) if input_enabled else Vector2.ZERO
 
-	velocity.x = direction.x * speed;
-	velocity.y = direction.y * speed;
+	if Input.is_action_pressed(InputMapActions.SPRINT) && input_enabled:
+		velocity.x = direction.x * speed * sprint_multiplier
+		velocity.y = direction.y * speed * sprint_multiplier
+
+		animation_tree["parameters/Move/TimeScale/scale"] = lerp(animation_tree["parameters/Move/TimeScale/scale"], 1.5, 10 * delta)
+	else:
+		velocity.x = direction.x * speed
+		velocity.y = direction.y * speed
+
+		animation_tree["parameters/Move/TimeScale/scale"] = lerp(animation_tree["parameters/Move/TimeScale/scale"], 1.0, 10 * delta)
 
 	move_and_slide()
 
@@ -55,9 +65,14 @@ func _physics_process(delta: float) -> void:
 	# --- Shoot Light ---
 
 	# Begin aiming light
-	if Input.is_action_pressed(InputMapActions.SHOOT) && light_state == LightState.READY && !mirror && level.light_shots > 0 && input_enabled:
+	if Input.is_action_just_pressed(InputMapActions.SHOOT) && light_state == LightState.READY && !mirror && level.light_shots > 0 && input_enabled:
 		light_state = LightState.AIMING
 		trajectory_line.visible = true
+	
+	# Cancel light aiming
+	if Input.is_action_just_pressed(InputMapActions.PICKUP) && light_state == LightState.AIMING && !mirror && input_enabled:
+		light_state = LightState.READY
+		trajectory_line.visible = false
 
 	# Shoot light after aimed
 	if Input.is_action_just_released(InputMapActions.SHOOT) && light_state == LightState.AIMING && !mirror && input_enabled:
@@ -79,7 +94,7 @@ func _physics_process(delta: float) -> void:
 		get_tree().current_scene.add_child(impact)
 
 		# Play random shoot sound
-		GameManager.play_audio_stream(shoot_audio_stream, global_position)
+		GameManager.play_audio_stream_2d(shoot_audio_stream, global_position)
 
 		# Notify level to use light shot
 		level.use_light_shot()

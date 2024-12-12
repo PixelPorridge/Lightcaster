@@ -61,6 +61,7 @@ position = Vector2(128, 72)
 process_callback = 0
 
 [node name="LevelUI" parent="." node_paths=PackedStringArray("level") instance=ExtResource("2_jsgls")]
+visible = false
 level = NodePath("..")
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_xwind")]

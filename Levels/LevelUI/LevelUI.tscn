@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://mi5eru04odwu"]
+[gd_scene load_steps=7 format=3 uid="uid://mi5eru04odwu"]
 
 [ext_resource type="Script" path="res://Levels/LevelUI/LevelUI.gd" id="1_a1pir"]
 [ext_resource type="PackedScene" uid="uid://dbooybtww6khe" path="res://Levels/LevelUI/LightShotIcon/LightShotIcon.tscn" id="2_o0xan"]
 [ext_resource type="FontFile" uid="uid://yxjha0v2s8r2" path="res://Fonts/DangrekRegular.ttf" id="3_qjmjq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcv0u"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 1
 border_width_top = 1
@@ -22,14 +26,33 @@ base_font = ExtResource("3_qjmjq")
 spacing_top = -4
 spacing_bottom = -5
 
-[node name="LevelUI" type="CanvasLayer" node_paths=PackedStringArray("black_ui", "light_shots_ui", "light_shots_hbox", "level_title_ui", "level_title_label")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndh8r"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing_size = 0.1
+
+[node name="LevelUI" type="CanvasLayer" node_paths=PackedStringArray("black_ui", "light_shots_ui", "light_shots_hbox", "level_title_ui", "level_title_label", "level_info_ui", "level_info_label")]
 script = ExtResource("1_a1pir")
 black_ui = NodePath("Control/Black")
 light_shot_icon_scene = ExtResource("2_o0xan")
 light_shots_ui = NodePath("Control/LightShots")
-light_shots_hbox = NodePath("Control/LightShots/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer")
+light_shots_hbox = NodePath("Control/LightShots/PanelContainer/VBoxContainer/HBoxContainer")
 level_title_ui = NodePath("Control/LevelTitle")
-level_title_label = NodePath("Control/LevelTitle/PanelContainer/MarginContainer/Label")
+level_title_label = NodePath("Control/LevelTitle/PanelContainer/Label")
+level_info_ui = NodePath("Control/LevelInfo")
+level_info_label = NodePath("Control/LevelInfo/PanelContainer/VBoxContainer/InfoLabel")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -55,25 +78,19 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fcv0u")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/LightShots/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 1
-theme_override_constants/margin_bottom = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/LightShots/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/LightShots/PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Label" type="Label" parent="Control/LightShots/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/LightShots/PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_fonts/font = SubResource("FontVariation_6xnxt")
 theme_override_font_sizes/font_size = 8
 text = "LIGHT"
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/LightShots/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/LightShots/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
@@ -96,20 +113,57 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_fcv0u")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/LevelTitle/PanelContainer"]
+[node name="Label" type="Label" parent="Control/LevelTitle/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 1
-theme_override_constants/margin_bottom = 1
-
-[node name="Label" type="Label" parent="Control/LevelTitle/PanelContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
+size_flags_vertical = 1
 theme_override_fonts/font = SubResource("FontVariation_6xnxt")
 theme_override_font_sizes/font_size = 8
 text = "LEVEL UNKOWN"
+uppercase = true
+
+[node name="LevelInfo" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -10.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/LevelInfo"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ndh8r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/LevelInfo/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="InfoLabel" type="Label" parent="Control/LevelInfo/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = SubResource("FontVariation_6xnxt")
+theme_override_font_sizes/font_size = 8
+text = "Do this to do that"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="CloseLabel" type="Label" parent="Control/LevelInfo/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = SubResource("FontVariation_6xnxt")
+theme_override_font_sizes/font_size = 6
+text = "Press 'Space' to close"
+horizontal_alignment = 1
+vertical_alignment = 1
 uppercase = true
 
 [node name="Black" type="ColorRect" parent="Control"]

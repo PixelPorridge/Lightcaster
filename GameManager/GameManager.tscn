@@ -10,8 +10,10 @@ script = ExtResource("1_tui63")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_c66au")
 autoplay = true
+bus = &"Music"
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_og2e8")
-volume_db = -16.0
+volume_db = -8.0
 autoplay = true
+bus = &"Ambience"

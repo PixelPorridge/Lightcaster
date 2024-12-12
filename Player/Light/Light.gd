@@ -40,11 +40,11 @@ func _physics_process(delta: float) -> void:
 			var reflect = collision.get_remainder().bounce(collision.get_normal())
 			rotation = reflect.angle()
 		
-			GameManager.play_audio_stream(reflect_audio_stream, global_position)
+			GameManager.play_audio_stream_2d(reflect_audio_stream, global_position)
 		
 		# Stop light
 		elif collision_layer_bitmask == CollisionLayers.LIGHT_BLOCKER_BITMASK:
-			GameManager.play_audio_stream(contact_audio_stream, global_position)
+			GameManager.play_audio_stream_2d(contact_audio_stream, global_position)
 
 			queue_free()
 		
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 
 			enemy.try_deactivate()
 
-			GameManager.play_audio_stream(contact_audio_stream, global_position)
+			GameManager.play_audio_stream_2d(contact_audio_stream, global_position)
 
 			queue_free()
 		
@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 
 			charger.deactivate()
 
-			GameManager.play_audio_stream(contact_audio_stream, global_position)
+			GameManager.play_audio_stream_2d(contact_audio_stream, global_position)
 
 			queue_free()
 		
